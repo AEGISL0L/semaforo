@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from models import db, Semaforo
 
 app = Flask(__name__)
 
@@ -7,10 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///traffic_lights.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
-
-# Import models
-from models import Semaforo
+db.init_app(app)
 
 @app.route('/')
 def index():
@@ -32,4 +29,7 @@ def update(id):
     return render_template('update.html', light=light)
 
 if __name__ == '__main__':
+    # Crear las tablas antes de ejecutar la aplicación
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

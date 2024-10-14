@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Estados de los Semáforos{% endblock %}
+
+{% block content %}
+<h1 class="mt-5">Estados de los Semáforos</h1>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for light in semaforos %}
+        <tr>
+            <td>{{ light.nombre }}</td>
+            <td>{{ light.estado | capitalize }}</td>
+            <td>
+                <a href="{{ url_for('update', id=light.id) }}" class="btn btn-sm btn-warning">Editar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

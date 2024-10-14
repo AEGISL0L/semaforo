@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Semáforo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Actualizar Estado de {{ light.nombre }}</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select class="form-control" id="estado" name="estado">
+                    <option value="rojo" {% if light.estado == 'rojo' %}selected{% endif %}>Rojo</option>
+                    <option value="amarillo" {% if light.estado == 'amarillo' %}selected{% endif %}>Amarillo</option>
+                    <option value="verde" {% if light.estado == 'verde' %}selected{% endif %}>Verde</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
